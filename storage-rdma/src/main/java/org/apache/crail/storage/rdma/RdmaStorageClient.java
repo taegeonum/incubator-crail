@@ -59,6 +59,7 @@ public class RdmaStorageClient implements StorageClient {
 			synchronized(this){
 				if (clientMrCache == null){
 					this.clientMrCache = new MrCache();
+					LOG.info("jy: created MrCache");
 				}
 			}
 		}

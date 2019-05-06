@@ -19,10 +19,10 @@
 package org.apache.crail;
 
 public interface CrailFile extends CrailNode {
-	public abstract CrailInputStream getDirectInputStream(long readHint) throws Exception;
-	public abstract CrailOutputStream getDirectOutputStream(long writeHint) throws Exception;
-	public abstract long getToken();
-	public abstract long getFd();
+	CrailInputStream getDirectInputStream(long readHint) throws Exception;
+	CrailOutputStream getDirectOutputStream(long writeHint) throws Exception;
+	long getToken();
+	long getFd();
 
 	default CrailBufferedInputStream getBufferedInputStream(long readHint) throws Exception {
 		return new FileBufferedInputStream(this, readHint);

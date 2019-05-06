@@ -64,7 +64,7 @@ public class RdmaStorageServer implements Runnable, StorageServer {
 			LOG.info("Configured network interface " + RdmaConstants.STORAGE_RDMA_INTERFACE + " cannot be found..exiting!!!");
 			return;
 		}
-		this.datanodeGroup = new RdmaPassiveEndpointGroup<RdmaStorageServerEndpoint>(-1, RdmaConstants.STORAGE_RDMA_QUEUESIZE, 4, RdmaConstants.STORAGE_RDMA_QUEUESIZE*100);
+		this.datanodeGroup = new RdmaPassiveEndpointGroup<>(-1, RdmaConstants.STORAGE_RDMA_QUEUESIZE, 4, RdmaConstants.STORAGE_RDMA_QUEUESIZE*100);
 		this.datanodeServerEndpoint = datanodeGroup.createServerEndpoint();		
 		datanodeGroup.init(new RdmaStorageEndpointFactory(datanodeGroup, this));
 		datanodeServerEndpoint.bind(serverAddr, RdmaConstants.STORAGE_RDMA_BACKLOG);

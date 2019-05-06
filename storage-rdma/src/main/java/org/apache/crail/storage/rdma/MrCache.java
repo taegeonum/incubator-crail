@@ -27,14 +27,17 @@ import org.apache.crail.CrailBuffer;
 
 import com.ibm.disni.verbs.IbvMr;
 import com.ibm.disni.verbs.IbvPd;
+import org.apache.crail.utils.CrailUtils;
+import org.slf4j.Logger;
 
 public class MrCache {
+	private static final Logger LOG = CrailUtils.getLogger();
 	private ConcurrentHashMap<Integer, DeviceMrCache> cache;
 	private AtomicLong cacheOps;	
 	private AtomicLong cacheMisses;
 	
 	public MrCache(){
-		this.cache = new ConcurrentHashMap<Integer, DeviceMrCache>();
+		this.cache = new ConcurrentHashMap<>();
 		this.cacheMisses = new AtomicLong(0);
 		this.cacheOps = new AtomicLong(0);
 	}
@@ -43,6 +46,7 @@ public class MrCache {
 		DeviceMrCache deviceCache = cache.get(pd.getHandle());
 		if (deviceCache == null) {
 			deviceCache = new DeviceMrCache(pd);
+			LOG.info("jy: created deviceMrCache, pd {}", pd.getHandle());
 			DeviceMrCache oldLine = cache.putIfAbsent(pd.getHandle(), deviceCache);
 			if (oldLine != null) {
 				deviceCache = oldLine;
@@ -78,16 +82,18 @@ public class MrCache {
 		
 		public DeviceMrCache(IbvPd pd){
 			this.pd = pd;
-			this.device = new ConcurrentHashMap<Long, IbvMr>();
+			this.device = new ConcurrentHashMap<>();
 		}
 		
 		public IbvMr get(CrailBuffer buffer) throws IOException{
 			IbvMr mr = device.get(buffer.address());
+			LOG.info("jy: get MR at addr {}, length {}", mr.getAddr(), mr.getLength());
 			return mr;
 		}
 		
 		public void put(IbvMr mr) throws IOException{
 			device.put(mr.getAddr(), mr);
+			LOG.info("jy: put MR at addr {}, length {}", mr.getAddr(), mr.getLength());
 		}		
 		
 		public void close() throws IOException {

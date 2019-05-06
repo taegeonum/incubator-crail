@@ -43,11 +43,11 @@ import org.apache.crail.utils.CrailUtils;
 import org.slf4j.Logger;
 
 public interface StorageServer extends Configurable, Runnable {
-	public abstract StorageResource allocateResource() throws Exception;
-	public abstract boolean isAlive();
-	public abstract InetSocketAddress getAddress();
+	StorageResource allocateResource() throws Exception;
+	boolean isAlive();
+	InetSocketAddress getAddress();
 	
-	public static void main(String[] args) throws Exception {
+	static void main(String[] args) throws Exception {
 		Logger LOG = CrailUtils.getLogger();
 		CrailConfiguration conf = new CrailConfiguration();
 		CrailConstants.updateConstants(conf);
