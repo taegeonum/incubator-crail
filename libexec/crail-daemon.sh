@@ -81,6 +81,7 @@ if [ "$HADOOP_IDENT_STRING" = "" ]; then
   export HADOOP_IDENT_STRING="$USER"
 fi
 
+export CRAIL_HOME="/home/jyeo/incubator-crail"
 
 # get log directory
 if [ "$HADOOP_LOG_DIR" = "" ]; then

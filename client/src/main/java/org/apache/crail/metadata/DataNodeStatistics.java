@@ -20,8 +20,11 @@ package org.apache.crail.metadata;
 
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
+import org.apache.crail.utils.CrailUtils;
+import org.slf4j.Logger;
 
 public class DataNodeStatistics {
+	private static final Logger LOG = CrailUtils.getLogger();
 	public static final int CSIZE = 12;
 	
 	private long serviceId;

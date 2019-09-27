@@ -20,6 +20,7 @@ bin=`dirname ${bin}`
 bin=`cd "$bin"; pwd`
 
 LIBEXEC_DIR="$bin"/../libexec
+JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 JAVA=$JAVA_HOME/bin/java
 
 function print_usage(){
@@ -68,8 +69,9 @@ elif [ "$COMMAND" = "test" ] ; then
 fi
 
 CONF_PATH="$bin"/../conf
-export CLASSPATH="$bin"/../jars/*:${CONF_PATH}:.
 export LD_LIBRARY_PATH="$bin/../lib:$LD_LIBRARY_PATH"
+export CLASSPATH="${CRAIL_HOME}/assembly/target/apache-crail-1.2-incubating-SNAPSHOT-bin/apache-crail-1.2-incubating-SNAPSHOT/jars"/*:${CONF_PATH}:.
+
 
 if [ -f "${CONF_PATH}/crail-env.sh" ]; then
   # Promote all variable declarations to environment (exported) variables

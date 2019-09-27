@@ -87,13 +87,11 @@ public class MrCache {
 		
 		public IbvMr get(CrailBuffer buffer) throws IOException{
 			IbvMr mr = device.get(buffer.address());
-			LOG.info("jy: get MR at addr {}, length {}", mr.getAddr(), mr.getLength());
 			return mr;
 		}
 		
 		public void put(IbvMr mr) throws IOException{
 			device.put(mr.getAddr(), mr);
-			LOG.info("jy: put MR at addr {}, length {}", mr.getAddr(), mr.getLength());
 		}		
 		
 		public void close() throws IOException {

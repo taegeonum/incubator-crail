@@ -86,6 +86,8 @@ public abstract class BufferCache implements CrailStatistics.StatisticsProvider,
 		cacheOut.incrementAndGet();
 		cacheMax.updateAndGet(x -> Math.max(x, cacheOut.get()));
 
+		String log = printStatistics();
+		LOG.info(log);
 		CrailBuffer buffer = cache.poll();
 		if (buffer == null){
 			synchronized(this){

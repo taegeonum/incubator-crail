@@ -66,6 +66,7 @@ public class DaRPCNameNodeServer extends RpcServer {
 	public void run() {
 		try {
 			InetSocketAddress addr = CrailUtils.getNameNodeAddress();
+			LOG.info("DaRPCNameNodeServerAddr " + addr);
 			namenodeServerEp.bind(addr, DaRPCConstants.NAMENODE_DARPC_BACKLOG);
 			LOG.info("opened server at " + addr);
 			while (true) {
