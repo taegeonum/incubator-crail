@@ -1,0 +1,14 @@
+crail.namenode.address            crail://elsa-07-ib1:9060
+crail.namenode.rpctype		  org.apache.crail.namenode.rpc.darpc.DaRPCNameNode
+crail.cachepath                   /dev/hugepages/cache
+crail.cachelimit                  10737418240
+crail.storage.rdma.interface	  ib1
+crail.storage.rdma.datapath       /dev/hugepages/data
+crail.storage.rdma.storagelimit   118111600640
+crail.storage.rdma.port           9061
+crail.storage.rdma.queuesize	  32 
+crail.blocksize			  1048576 
+crail.regionsize		  1073741824
+crail.storage.classes             1
+crail.storage.types               org.apache.crail.storage.rdma.RdmaStorageTier
+

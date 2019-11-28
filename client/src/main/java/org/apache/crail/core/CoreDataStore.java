@@ -102,7 +102,7 @@ public class CoreDataStore extends CrailStore {
 
 	public CoreDataStore(CrailConfiguration conf) throws Exception {
 		CrailConstants.updateConstants(conf);
-		CrailConstants.printConf();
+		// CrailConstants.printConf();
 		CrailConstants.verify();
 
 		this.bufferCache = BufferCache.createInstance(CrailConstants.CACHE_IMPL);
@@ -115,7 +115,7 @@ public class CoreDataStore extends CrailStore {
 			String name = tokenizer.nextToken();
 			StorageClient dataNode = StorageClient.createInstance(name);
 			dataNode.init(statistics, bufferCache, conf, null);
-			dataNode.printConf(LOG);
+			// dataNode.printConf(LOG);
 			dataNodeClients.add(dataNode);
 		}
 		this.datanodeEndpointCache = new EndpointCache(fsId, dataNodeClients);
@@ -124,7 +124,7 @@ public class CoreDataStore extends CrailStore {
 		InetSocketAddress nnAddr = CrailUtils.getNameNodeAddress();
 		this.rpcClient = RpcClient.createInstance(CrailConstants.NAMENODE_RPC_TYPE);
 		rpcClient.init(conf, null);
-		rpcClient.printConf(LOG);
+		// rpcClient.printConf(LOG);
 		ConcurrentLinkedQueue<InetSocketAddress> namenodeList = CrailUtils.getNameNodeList();
 		ConcurrentLinkedQueue<RpcConnection> connectionList = new ConcurrentLinkedQueue<RpcConnection>();
 		while(!namenodeList.isEmpty()){
@@ -311,9 +311,7 @@ public class CoreDataStore extends CrailStore {
 	public Upcoming<CrailNode> delete(String path, boolean recursive) throws Exception {
 		FileName name = new FileName(path);
 
-		if (CrailConstants.DEBUG){
-			LOG.info("delete: name " + path + ", recursive " + recursive);
-		}
+		LOG.info("delete: name " + path + ", recursive " + recursive);
 
 		RpcFuture<RpcDeleteFile> fileRes = rpcConnection.removeFile(name, recursive);
 		return new DeleteNodeFuture(this, path, recursive, fileRes);
@@ -336,9 +334,7 @@ public class CoreDataStore extends CrailStore {
 
 		blockCache.remove(fileInfo.getFd());
 
-		if (CrailConstants.DEBUG){
-			LOG.info("delete: name " + path + ", recursive " + recursive + ", success");
-		}
+		LOG.info("_delete: name " + path + ", recursive " + recursive + ", success");
 
 		CoreNode node = CoreNode.create(this, fileInfo, path);
 		node.addSyncOperation(syncOperation);

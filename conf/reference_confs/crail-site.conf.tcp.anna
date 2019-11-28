@@ -1,0 +1,10 @@
+crail.namenode.address            crail://anna-03:9060
+crail.cachepath                   /dev/hugepages/cache
+crail.cachelimit                  10737418240
+crail.storage.tcp.interface	  eno1
+crail.storage.tcp.datapath	  /dev/hugepages/data
+crail.storage.tcp.storagelimit    59055800320
+crail.storage.tcp.port            9061
+crail.storage.tcp.cores		  10
+crail.storage.types               org.apache.crail.storage.tcp.TcpStorageTier
+

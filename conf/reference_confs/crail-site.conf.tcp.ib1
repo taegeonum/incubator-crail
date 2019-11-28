@@ -1,0 +1,9 @@
+crail.namenode.address            crail://elsa-07-ib1:9060
+crail.cachepath                   /dev/hugepages/cache
+crail.cachelimit                  10737418240
+crail.storage.tcp.interface	  ib1
+crail.storage.tcp.datapath	  /dev/hugepages/data
+crail.storage.tcp.storagelimit    107374182400
+crail.storage.tcp.port            9061
+crail.storage.types               org.apache.crail.storage.tcp.TcpStorageTier
+
