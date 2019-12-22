@@ -50,7 +50,7 @@ public class MappedBufferCache extends BufferCache {
 		LOG.info("buffer cache, allocationCount " + allocationCount + ", bufferCount " + bufferCount);
 
 		if (allocationCount > 0){
-			id = "" + System.currentTimeMillis();
+			id = "" + System.nanoTime();
 			directory = CrailUtils.getCacheDirectory(id);
 			dir = new File(directory);
 			try {
