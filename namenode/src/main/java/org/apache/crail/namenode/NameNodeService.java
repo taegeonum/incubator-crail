@@ -492,7 +492,8 @@ public class NameNodeService implements RpcNameNodeService, Sequencer {
 		if (block == null && fileInfo.getToken() == token){
 			block = blockStore.getBlock(fileInfo.getStorageClass(), fileInfo.getLocationClass());
 			if (block == null){
-				LOG.warn("No free block at getting file");
+				LOG.warn("No free block at getting file .. length: {}, {}",
+						blockStore.storageClasses.length, fileInfo);
 				return RpcErrors.ERR_NO_FREE_BLOCKS;
 			}
 			if (!fileInfo.addBlock(index, block)){
