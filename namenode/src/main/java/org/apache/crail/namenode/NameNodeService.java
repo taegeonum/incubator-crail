@@ -83,6 +83,9 @@ public class NameNodeService implements RpcNameNodeService, Sequencer {
 			return RpcErrors.ERR_PROTOCOL_MISMATCH;
 		}
 
+
+		LOG.info("Creating file... {}", request);
+
 		//get params
 		FileName fileHash = request.getFileName();
 		CrailNodeType type = request.getFileType();
@@ -128,6 +131,9 @@ public class NameNodeService implements RpcNameNodeService, Sequencer {
 		
 		NameNodeBlockInfo fileBlock = blockStore.getBlock(fileInfo.getStorageClass(), fileInfo.getLocationClass());
 		if (fileBlock == null){
+		    LOG.warn("No free block... storageClass: {}/{}, locationClass: {}", fileInfo.getStorageClass(),
+					blockStore.storageClasses.length,
+					fileInfo.getLocationClass());
 			return RpcErrors.ERR_NO_FREE_BLOCKS;
 		}			
 		if (!fileInfo.addBlock(0, fileBlock)){
@@ -141,6 +147,7 @@ public class NameNodeService implements RpcNameNodeService, Sequencer {
 			if (parentBlock == null){
 				parentBlock = blockStore.getBlock(parentInfo.getStorageClass(), parentInfo.getLocationClass());
 				if (parentBlock == null){
+					LOG.warn("No free block at parent info");
 					return RpcErrors.ERR_NO_FREE_BLOCKS;
 				}			
 				if (!parentInfo.addBlock(index, parentBlock)){
@@ -485,6 +492,7 @@ public class NameNodeService implements RpcNameNodeService, Sequencer {
 		if (block == null && fileInfo.getToken() == token){
 			block = blockStore.getBlock(fileInfo.getStorageClass(), fileInfo.getLocationClass());
 			if (block == null){
+				LOG.warn("No free block at getting file");
 				return RpcErrors.ERR_NO_FREE_BLOCKS;
 			}
 			if (!fileInfo.addBlock(index, block)){

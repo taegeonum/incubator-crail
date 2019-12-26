@@ -35,7 +35,7 @@ import org.slf4j.Logger;
 public class BlockStore {
 	private static final Logger LOG = CrailUtils.getLogger();
 	
-	private StorageClass[] storageClasses;
+	public StorageClass[] storageClasses;
 	
 	public BlockStore(){
 		storageClasses = new StorageClass[CrailConstants.STORAGE_CLASSES]; 
