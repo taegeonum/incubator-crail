@@ -258,10 +258,12 @@ class StorageClass {
 						DataNodeBlocks anyDn = arrayList.get(index);
 						if (anyDn.isOnline()){
 							block = anyDn.getFreeBlock();
+							LOG.warn("Get free block from datanode {}/{}, start index {}", index, block.getDnInfo(), startIndex);
 						}
 						if (block != null){
 							break;
-						} 
+						}
+						LOG.warn("Free block iteration... {}/{}", index, size);
 					}
 				}
 				return block;
