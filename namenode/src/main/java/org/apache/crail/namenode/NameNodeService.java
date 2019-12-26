@@ -290,7 +290,9 @@ public class NameNodeService implements RpcNameNodeService, Sequencer {
 		}
 		
 		appendToDeleteQueue(fileInfo);
-		
+
+		LOG.warn("removeFile: filename, fd " + fileInfo.getFd());
+
 		if (CrailConstants.DEBUG){
 			LOG.info("removeFile: filename, fd " + fileInfo.getFd());
 		}	

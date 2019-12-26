@@ -141,6 +141,8 @@ class StorageClass {
 
 		current.touch();
 		current.addFreeBlock(block);
+
+		LOG.info("Add free block to {}.. size {}", dnAddress, current.getBlockCount());
 		return RpcErrors.ERR_OK;
 	}
 
