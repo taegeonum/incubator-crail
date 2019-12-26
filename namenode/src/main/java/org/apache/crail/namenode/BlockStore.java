@@ -100,11 +100,14 @@ class StorageClass {
 		this.storageClass = storageClass;
 		this.membership = new ConcurrentHashMap<Long, DataNodeBlocks>();
 		this.affinitySets = new ConcurrentHashMap<Integer, DataNodeArray>();
+		this.blockSelection = new RandomBlockSelection();
+		/*
 		if (CrailConstants.NAMENODE_BLOCKSELECTION.equalsIgnoreCase("roundrobin")){
 			this.blockSelection = new RoundRobinBlockSelection();
 		} else {
 			this.blockSelection = new RandomBlockSelection();
 		}
+		*/
 		this.anySet = new DataNodeArray(blockSelection);
 	}
 	
@@ -258,12 +261,12 @@ class StorageClass {
 						DataNodeBlocks anyDn = arrayList.get(index);
 						if (anyDn.isOnline()){
 							block = anyDn.getFreeBlock();
-							LOG.warn("Get free block from datanode {}/{}, start index {}", index, block.getDnInfo(), startIndex);
+							//LOG.warn("Get free block from datanode {}/{}, start index {}", index, block.getDnInfo(), startIndex);
 						}
 						if (block != null){
 							break;
 						}
-						LOG.warn("Free block iteration... {}/{}", index, size);
+						//LOG.warn("Free block iteration... {}/{}", index, size);
 					}
 				}
 				return block;
