@@ -18,6 +18,7 @@
 
 package org.apache.crail.namenode;
 
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.DelayQueue;
 
 import org.apache.crail.utils.CrailUtils;
@@ -27,9 +28,9 @@ public class GCServer implements Runnable {
 	private static final Logger LOG = CrailUtils.getLogger();
 	
 	private NameNodeService rpcService;
-	private DelayQueue<AbstractNode> deleteQueue;
+	private BlockingQueue<AbstractNode> deleteQueue;
 	
-	public GCServer(NameNodeService service, DelayQueue<AbstractNode> deleteQueue){
+	public GCServer(NameNodeService service, BlockingQueue<AbstractNode> deleteQueue){
 		this.rpcService = service;
 		this.deleteQueue = deleteQueue;
 	}

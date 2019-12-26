@@ -21,8 +21,10 @@ package org.apache.crail.namenode;
 import java.io.IOException;
 import java.net.URI;
 import java.util.StringTokenizer;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.DelayQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.apache.crail.CrailNodeType;
@@ -48,7 +50,7 @@ public class NameNodeService implements RpcNameNodeService, Sequencer {
 	private long serviceSize;
 	private AtomicLong sequenceId;
 	private BlockStore blockStore;
-	private DelayQueue<AbstractNode> deleteQueue;
+	private BlockingQueue<AbstractNode> deleteQueue;
 	private FileStore fileTree;
 	private ConcurrentHashMap<Long, AbstractNode> fileTable;	
 	private GCServer gcServer;
@@ -61,7 +63,7 @@ public class NameNodeService implements RpcNameNodeService, Sequencer {
 		this.serviceSize = Long.parseLong(tokenizer.nextToken().substring(5));
 		this.sequenceId = new AtomicLong(serviceId);
 		this.blockStore = new BlockStore();
-		this.deleteQueue = new DelayQueue<AbstractNode>();
+		this.deleteQueue = new LinkedBlockingQueue<>();
 		this.fileTree = new FileStore(this);
 		this.fileTable = new ConcurrentHashMap<Long, AbstractNode>();
 		this.gcServer = new GCServer(this, deleteQueue);
