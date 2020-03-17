@@ -57,7 +57,7 @@ public class CrailConstants {
 	public static boolean STATISTICS = true;
 
 	public static final String RPC_TIMEOUT_KEY = "crail.rpctimeout";
-	public static int RPC_TIMEOUT = 1000;
+	public static int RPC_TIMEOUT = 10000;
 
 	public static final String DATA_TIMEOUT_KEY = "crail.datatimeout";
 	public static int DATA_TIMEOUT = 1000;

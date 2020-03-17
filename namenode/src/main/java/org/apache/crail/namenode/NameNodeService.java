@@ -86,7 +86,7 @@ public class NameNodeService implements RpcNameNodeService, Sequencer {
 		}
 
 
-		LOG.info("Creating file... {}", request);
+		//LOG.info("Creating file... {}", request);
 
 		//get params
 		FileName fileHash = request.getFileName();
