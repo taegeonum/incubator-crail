@@ -239,6 +239,7 @@ public class NameNodeService implements RpcNameNodeService, Sequencer {
 		//rpc
 		AbstractNode storedFile = fileTable.get(fileInfo.getFd());
 		if (storedFile == null){
+			LOG.info("File not open in setFile !! " + fileInfo.getFd() + ", request: " + request);
 			return RpcErrors.ERR_FILE_NOT_OPEN;			
 		}
 		
@@ -484,6 +485,7 @@ public class NameNodeService implements RpcNameNodeService, Sequencer {
 		//rpc
 		AbstractNode fileInfo = fileTable.get(fd);
 		if (fileInfo == null){
+			LOG.info("File not open in getBlock , fd " + fd + ", request: " + request);
 			return RpcErrors.ERR_FILE_NOT_OPEN;			
 		}
 		
