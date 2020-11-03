@@ -20,7 +20,7 @@ bin=`dirname ${bin}`
 bin=`cd "$bin"; pwd`
 
 LIBEXEC_DIR="$bin"/../libexec
-JAVA_HOME=/usr/lib/jvm/java-8-oracle/
+JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/
 JAVA=$JAVA_HOME/bin/java
 
 function print_usage(){
